@@ -537,4 +537,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NetConf.Xncf.2020\NetConf.Xncf.2020.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NetConf.Xncf.Admin\NetConf.Xncf.Admin.csproj" />
+  </ItemGroup>
 </Project>
