@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using NetConf.Xncf.Admin.Models.DatabaseModel;
 using NetConf.Xncf.Admin.Models.DatabaseModel.Dto;
+using Senparc.Ncf.Utility;
+
 namespace NetConf.Xncf.Admin.Services
 {
     public class ProductsService : ServiceBase<Products>
@@ -40,6 +42,38 @@ namespace NetConf.Xncf.Admin.Services
             await SaveObjectAsync(products);
         }
 
+        #region 接口
+        public async Task<object> ApiGetListAsync(string categoryId,int pageIndex, int pageSize)
+        {
+            var seh = new SenparcExpressionHelper<Models.DatabaseModel.Products>();
+            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(categoryId), _ => _.CategoryId.Equals(categoryId));
+            var where = seh.BuildWhereExpression();
+            List<Products> products = (await base.GetObjectListAsync(pageIndex, pageSize, where, "AddTime Desc")).ToList();
+            return products.Select(_ => new
+            {
+                _.Id,
+                _.Name,
+                _.Cover,
+                _.AddTime
+            });
+        }
+
+        public async Task<object> ApiGetDetailAsync(string id)
+        {
+            var seh = new SenparcExpressionHelper<Models.DatabaseModel.Products>();
+            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(id), _ => _.Id.Equals(id));
+            var where = seh.BuildWhereExpression();
+            var products = await GetObjectAsync(where);
+            return new { 
+                products.Id,
+                products.Name,
+                products.Cover,
+                products.Video,
+                products.Content,
+                products.AddTime
+            };
+        }
+        #endregion
     }
 
 }
