@@ -45,7 +45,7 @@ new Vue({
                 visible: false,
                 data:
                 {
-                    nickName: '', account: '', password: '', name: '', gender: '', balance: ''
+                    id:'',nickName: '', account: '', password: '', name: '', gender: '', balance: 0
                 },
                 rules:
                 {
@@ -71,7 +71,7 @@ new Vue({
             if (!val)
             {
                 this.dialog.data = {
-                    nickName: '', account: '', password: '', name: '', gender: '', balance: ''
+                    id:'',nickName: '', account: '', password: '', name: '', gender: '', balance: 0
                 };
                 this.dialog.updateLoading = false;
                 this.dialog.disabled = false;
@@ -154,20 +154,17 @@ new Vue({
         {
             let that = this
             that.dialog.visible = true;
-            //获取分类列表数据
-            //that.getCategoryList();
             if (flag === 'add')
             {
                 // 新增
                 that.dialog.title = '新增作品';
                 that.dialogImageUrl = '';
-                //that.$refs['bodyEditor'].editor.setData('');
                 return;
             }
             // 编辑
-            let { nickName, account, password, name, gender, balance } = row;
+            let { id,nickName, account, password, name, gender, balance } = row;
             that.dialog.data = {
-                nickName, account, password, name, gender, balance
+                id,nickName, account, password, name, gender, balance
             };
             //if (cover != '' && cover != undefined)
             //{
@@ -181,35 +178,10 @@ new Vue({
             //{
             //    that.editorData = this.$refs['bodyEditor'].editor.setData(body);
             //}
-            // dialog中父级菜单 做递归显示
-            //let x = [];
-            //that.recursionFunc(row, this.categoryData, x);
-            //that.dialog.data.categoryId = x;
 
             if (flag === 'edit')
             {
                 that.dialog.title = '编辑作品';
-            }
-        },
-        // 设置父级菜单默认显示 递归
-        recursionFunc(row, source, dest)
-        {
-            if (row.categoryId === null)
-            {
-                return;
-            }
-            for (let i in source)
-            {
-                let ele = source[i];
-                if (row.categoryId === ele.id)
-                {
-                    this.recursionFunc(ele, this.categoryData, dest);
-                    dest.push(ele.id);
-                }
-                else
-                {
-                    this.recursionFunc(row, ele.children, dest);
-                }
             }
         },
         // 更新新增、编辑
@@ -218,19 +190,18 @@ new Vue({
             let that = this
             that.dialog.updateLoading = true;
             that.$refs['dataForm'].validate(valid => {
-                //that.editorData = that.$refs['bodyEditor'].editor.getData()
-                //that.dialog.data.body = that.$refs['bodyEditor'].editor.getData();
                 // 表单校验
                 if (valid)
                 {
                     that.dialog.updateLoading = true;
                     let data = {
+                        Id: that.dialog.data.id,
                         NickName: that.dialog.data.nickName,
                         Account: that.dialog.data.account,
                         Password: that.dialog.data.password,
                         Name: that.dialog.data.name,
                         Gender: that.dialog.data.gender,
-                        Balance: that.dialog.data.balance
+                        Balance: parseFloat(that.dialog.data.balance)
                     };
                     console.log('add-' + JSON.stringify(data));
                     service.post("/Admin/User/Edit?handler=Save", data).then(res => {

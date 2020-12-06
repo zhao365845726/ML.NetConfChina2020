@@ -1,7 +1,7 @@
 @page
 @model NetConf.Xncf.Admin.Areas.Admin.Pages.Products.IndexModel
 @{
-    ViewData["Title"] = "Products列表页面";
+    ViewData["Title"] = "商品列表页面";
     Layout = "_Layout_Vue";
 }
 
@@ -29,8 +29,8 @@
 
 @section breadcrumbs {
     <el-breadcrumb-item>扩展模块</el-breadcrumb-item>
-    <el-breadcrumb-item>Products管理</el-breadcrumb-item>
-    <el-breadcrumb-item>Products列表</el-breadcrumb-item>
+    <el-breadcrumb-item>电子商务</el-breadcrumb-item>
+    <el-breadcrumb-item>商品列表</el-breadcrumb-item>
 }
 
 <div>
@@ -43,7 +43,7 @@
             </el-col>
         </el-row>
         <div class="filter-container">
-            <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加Products</el-button>
+            <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加商品</el-button>
         </div>
         <el-table :data="tableData"
                   style="width: 100%;margin-bottom: 20px;"
@@ -75,7 +75,7 @@
                 </template>
             </el-table-column>
             <el-table-column label="操作" align="center" fixed="right" width="150">
-                < template slot-scope="scope">
+                <template slot-scope="scope">
                     <el-button size="mini"
                         type="primary"
                         @@click="handleEdit(scope.$index, scope.row,'edit')">编辑</el-button>
@@ -94,7 +94,7 @@
          <el-dialog :title="dialog.title"
                    :visible.sync="dialog.visible"
                    :close-on-click-modal="false"
-                   width = "50%" >
+                   width = "700px" >
             <el-form ref="dataForm"
                      :rules = "dialog.rules"
                      :model = "dialog.data"

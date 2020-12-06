@@ -1,7 +1,7 @@
 @page
 @model NetConf.Xncf.Admin.Areas.Admin.Pages.Category.IndexModel
 @{
-    ViewData["Title"] = "Category列表页面";
+    ViewData["Title"] = "分类列表页面";
     Layout = "_Layout_Vue";
 }
 
@@ -29,8 +29,8 @@
 
 @section breadcrumbs {
     <el-breadcrumb-item>扩展模块</el-breadcrumb-item>
-    <el-breadcrumb-item>Category管理</el-breadcrumb-item>
-    <el-breadcrumb-item>Category列表</el-breadcrumb-item>
+    <el-breadcrumb-item>电子商务</el-breadcrumb-item>
+    <el-breadcrumb-item>分类列表</el-breadcrumb-item>
 }
 
 <div>
@@ -43,7 +43,7 @@
             </el-col>
         </el-row>
         <div class="filter-container">
-            <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加Category</el-button>
+            <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加分类</el-button>
         </div>
         <el-table :data="tableData"
                   style="width: 100%;margin-bottom: 20px;"
@@ -86,7 +86,7 @@
          <el-dialog :title="dialog.title"
                    :visible.sync="dialog.visible"
                    :close-on-click-modal="false"
-                   width = "50%" >
+                   width = "700px" >
             <el-form ref="dataForm"
                      :rules = "dialog.rules"
                      :model = "dialog.data"

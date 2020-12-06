@@ -1,7 +1,7 @@
 @page
 @model NetConf.Xncf.Admin.Areas.Admin.Pages.User.IndexModel
 @{
-    ViewData["Title"] = "User列表页面";
+    ViewData["Title"] = "用户列表页面";
     Layout = "_Layout_Vue";
 }
 
@@ -29,8 +29,8 @@
 
 @section breadcrumbs {
     <el-breadcrumb-item>扩展模块</el-breadcrumb-item>
-    <el-breadcrumb-item>User管理</el-breadcrumb-item>
-    <el-breadcrumb-item>User列表</el-breadcrumb-item>
+    <el-breadcrumb-item>电子商务</el-breadcrumb-item>
+    <el-breadcrumb-item>用户列表</el-breadcrumb-item>
 }
 
 <div>
@@ -43,7 +43,7 @@
             </el-col>
         </el-row>
         <div class="filter-container">
-            <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加User</el-button>
+            <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加用户</el-button>
         </div>
         <el-table :data="tableData"
                   style="width: 100%;margin-bottom: 20px;"
@@ -89,7 +89,7 @@
          <el-dialog :title="dialog.title"
                    :visible.sync="dialog.visible"
                    :close-on-click-modal="false"
-                   width = "50%" >
+                   width = "700px" >
             <el-form ref="dataForm"
                      :rules = "dialog.rules"
                      :model = "dialog.data"

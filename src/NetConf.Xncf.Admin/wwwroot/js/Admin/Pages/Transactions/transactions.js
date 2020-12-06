@@ -45,7 +45,7 @@ new Vue({
                 visible: false,
                 data:
                 {
-                    orderNum: '', status: 0, userId: '', quota: '', method: 0
+                    id:'',orderNum: '', status: 0, userId: '', quota: '', method: 0
                 },
                 rules:
                 {
@@ -71,7 +71,7 @@ new Vue({
             if (!val)
             {
                 this.dialog.data = {
-                    orderNum: '', status: 0, userId: '', quota: '', method: 0
+                    id:'',orderNum: '', status: 0, userId: '', quota: '', method: 0
                 };
                 this.dialog.updateLoading = false;
                 this.dialog.disabled = false;
@@ -165,9 +165,9 @@ new Vue({
                 return;
             }
             // 编辑
-            let { orderNum, status, userId, quota, method } = row;
+            let { id,orderNum, status, userId, quota, method } = row;
             that.dialog.data = {
-                orderNum, status, userId, quota, method
+                id,orderNum, status, userId, quota, method
             };
             //if (cover != '' && cover != undefined)
             //{
@@ -225,6 +225,7 @@ new Vue({
                 {
                     that.dialog.updateLoading = true;
                     let data = {
+                        Id: that.dialog.data.id,
                         OrderNum: that.dialog.data.orderNum,
                         Status: that.dialog.data.status,
                         UserId: that.dialog.data.userId,

@@ -41,17 +41,17 @@ new Vue({
             dialogVisible: false,
             dialog:
             {
-                title: '新增作品',
+                title: '新增分类',
                 visible: false,
                 data:
                 {
-                    name: '', sort: 0, pid: ''
+                    id:'',name: '', sort: 0, pid: ''
                 },
                 rules:
                 {
                     name:
                     [
-                        { required: true, message: "作品名称为必填项", trigger: "blur" }
+                        { required: true, message: "分类名称为必填项", trigger: "blur" }
                     ]
                 },
                 updateLoading: false,
@@ -71,7 +71,7 @@ new Vue({
             if (!val)
             {
                 this.dialog.data = {
-                    name: '', sort: 0, pid: ''
+                    id: '',name: '', sort: 0, pid: ''
                 };
                 this.dialog.updateLoading = false;
                 this.dialog.disabled = false;
@@ -120,7 +120,7 @@ new Vue({
                 message: '上传失败，请重新上传'
             });
         },
-        // 获取所有作品
+        // 获取所有分类
         async getList()
         {
             let that = this
@@ -149,7 +149,7 @@ new Vue({
                 log('categoryData',res,2);
             });
         },
-        // 编辑 // 新增作品 // 增加下一级
+        // 编辑 // 新增分类 // 增加下一级
         handleEdit(index, row, flag)
         {
             let that = this
@@ -159,15 +159,15 @@ new Vue({
             if (flag === 'add')
             {
                 // 新增
-                that.dialog.title = '新增作品';
+                that.dialog.title = '新增分类';
                 that.dialogImageUrl = '';
                 //that.$refs['bodyEditor'].editor.setData('');
                 return;
             }
             // 编辑
-            let { name, sort, pid } = row;
+            let { id,name, sort, pid } = row;
             that.dialog.data = {
-                name, sort, pid
+                id,name, sort, pid
             };
             //if (cover != '' && cover != undefined)
             //{
@@ -188,7 +188,7 @@ new Vue({
 
             if (flag === 'edit')
             {
-                that.dialog.title = '编辑作品';
+                that.dialog.title = '编辑分类';
             }
         },
         // 设置父级菜单默认显示 递归
@@ -225,6 +225,7 @@ new Vue({
                 {
                     that.dialog.updateLoading = true;
                     let data = {
+                        Id: that.dialog.data.id,
                         Name: that.dialog.data.name,
                         Sort: that.dialog.data.sort,
                         Pid: that.dialog.data.pid

@@ -45,7 +45,7 @@ new Vue({
                 visible: false,
                 data:
                 {
-                    orderNum: '', productId: '', userId: '', number: 0, amount: '', paidAmount: '', status: 0
+                    id:'',orderNum: '', productId: '', userId: '', number: 0, amount: '', paidAmount: '', status: 0
                 },
                 rules:
                 {
@@ -71,7 +71,7 @@ new Vue({
             if (!val)
             {
                 this.dialog.data = {
-                    orderNum: '', productId: '', userId: '', number: 0, amount: '', paidAmount: '', status: 0
+                    id:'',orderNum: '', productId: '', userId: '', number: 0, amount: '', paidAmount: '', status: 0
                 };
                 this.dialog.updateLoading = false;
                 this.dialog.disabled = false;
@@ -165,9 +165,9 @@ new Vue({
                 return;
             }
             // 编辑
-            let { orderNum, productId, userId, number, amount, paidAmount, status } = row;
+            let { id,orderNum, productId, userId, number, amount, paidAmount, status } = row;
             that.dialog.data = {
-                orderNum, productId, userId, number, amount, paidAmount, status
+                id,orderNum, productId, userId, number, amount, paidAmount, status
             };
             //if (cover != '' && cover != undefined)
             //{
@@ -225,6 +225,7 @@ new Vue({
                 {
                     that.dialog.updateLoading = true;
                     let data = {
+                        Id: that.dialog.data.id,
                         OrderNum: that.dialog.data.orderNum,
                         ProductId: that.dialog.data.productId,
                         UserId: that.dialog.data.userId,

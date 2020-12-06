@@ -45,7 +45,7 @@ new Vue({
                 visible: false,
                 data:
                 {
-                    categoryId: '', name: '', cover: '', video: '', content: ''
+                    id:'',categoryId: '', name: '', cover: '', video: '', content: ''
                 },
                 rules:
                 {
@@ -71,7 +71,7 @@ new Vue({
             if (!val)
             {
                 this.dialog.data = {
-                    categoryId: '', name: '', cover: '', video: '', content: ''
+                    id:'',categoryId: '', name: '', cover: '', video: '', content: ''
                 };
                 this.dialog.updateLoading = false;
                 this.dialog.disabled = false;
@@ -165,9 +165,9 @@ new Vue({
                 return;
             }
             // 编辑
-            let { categoryId, name, cover, video, content } = row;
+            let { id,categoryId, name, cover, video, content } = row;
             that.dialog.data = {
-                categoryId, name, cover, video, content
+                id,categoryId, name, cover, video, content
             };
             //if (cover != '' && cover != undefined)
             //{
@@ -225,6 +225,7 @@ new Vue({
                 {
                     that.dialog.updateLoading = true;
                     let data = {
+                        Id: that.dialog.data.id,
                         CategoryId: that.dialog.data.categoryId,
                         Name: that.dialog.data.name,
                         Cover: that.dialog.data.cover,
