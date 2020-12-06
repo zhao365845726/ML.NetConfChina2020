@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using NetConf.Xncf.Admin.Models.DatabaseModel;
 using NetConf.Xncf.Admin.Models.DatabaseModel.Dto;
+using Senparc.Ncf.Utility;
+
 namespace NetConf.Xncf.Admin.Services
 {
     public class TransactionsService : ServiceBase<Transactions>
@@ -39,6 +41,25 @@ namespace NetConf.Xncf.Admin.Services
             }
             await SaveObjectAsync(transactions);
         }
+
+        #region 接口
+        public async Task<object> ApiGetListAsync(string userId,int pageIndex,int pageSize)
+        {
+            var seh = new SenparcExpressionHelper<Models.DatabaseModel.Transactions>();
+            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(userId), _ => _.UserId.Equals(userId));
+            var where = seh.BuildWhereExpression();
+            var transList = await GetObjectListAsync(pageIndex, pageSize, where, "AddTime Desc");
+            var response = transList.Select(_ => new
+            {
+                _.Id,
+                _.OrderNum,
+                _.Status,
+                _.Quota,
+                _.Method
+            });
+            return response;
+        }
+        #endregion
 
     }
 

@@ -16,11 +16,13 @@ namespace NetConf.Xncf.Admin.Services
     {
         private readonly UserService userService;
         private readonly ProductsService productsService;
+        private readonly TransactionsService transactionsService;
 
-        public OrdersService(IRepositoryBase<Orders> repo, IServiceProvider serviceProvider,UserService userService,ProductsService productsService) : base(repo, serviceProvider)
+        public OrdersService(IRepositoryBase<Orders> repo, IServiceProvider serviceProvider,UserService userService,ProductsService productsService,TransactionsService transactionsService) : base(repo, serviceProvider)
         {
             this.userService = userService;
             this.productsService = productsService;
+            this.transactionsService = transactionsService;
         }
 
         //TODO: 更多业务方法可以写到这里
@@ -77,10 +79,11 @@ namespace NetConf.Xncf.Admin.Services
             return true;
         }
 
-        public async Task<object> ApiGetListAsync(string userId, int pageIndex,int pageSize)
+        public async Task<object> ApiGetListAsync(string userId,int status, int pageIndex,int pageSize)
         {
             var seh = new SenparcExpressionHelper<Models.DatabaseModel.Orders>();
             seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(userId), _ => _.UserId.Equals(userId));
+            seh.ValueCompare.AndAlso(status > 0, _ => _.Status.Equals(status));
             var where = seh.BuildWhereExpression();
             var orderList = await GetObjectListAsync(pageIndex,pageSize,where,"AddTime Desc");
             var userList = await userService.GetObjectListAsync(0, 0, _ => true, "AddTime Desc");
@@ -151,7 +154,18 @@ namespace NetConf.Xncf.Admin.Services
             var where = seh.BuildWhereExpression();
             Orders orders = await GetObjectAsync(where);
             orders.Status = 2;
+            orders.PaidAmount = orders.Amount;
             await SaveObjectAsync(orders);
+            //写入交易记录
+            TransactionsDto dto = new TransactionsDto()
+            {
+                OrderNum = orders.OrderNum,
+                Status = 2,
+                UserId = userId,
+                Quota = orders.Amount,
+                Method = 3
+            };
+            await transactionsService.CreateOrUpdateAsync(dto);
             return true;
         }
         #endregion

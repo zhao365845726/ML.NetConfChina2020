@@ -21,25 +21,26 @@ namespace NetConf.Xncf.Admin.Controllers
     [ApiVersion("1")]
     public class TransactionsController : BaseController
     {
-        private readonly CategoryService categoryService;
+        private readonly TransactionsService transactionsService;
 
-        public TransactionsController(CategoryService categoryService)
+        public TransactionsController(TransactionsService transactionsService)
         {
-            this.categoryService = categoryService;
+            this.transactionsService = transactionsService;
         }
 
         /// <summary>
-        /// 获取分类列表
+        /// 获取交易记录
         /// </summary>
+        /// <param name="userId">用户Id</param>
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">页大小</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetListAsync(int pageIndex, int pageSize)
+        public async Task<IActionResult> GetListAsync(string userId, int pageIndex, int pageSize)
         {
             try
             {
-                var response = await categoryService.ApiGetListAsync(pageIndex, pageSize);
+                var response = await transactionsService.ApiGetListAsync(userId,pageIndex, pageSize);
                 return Success(response);
             }
             catch (Exception ex)

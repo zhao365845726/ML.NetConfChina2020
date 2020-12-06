@@ -89,11 +89,12 @@
             <param name="orderId">订单Id</param>
             <returns></returns>
         </member>
-        <member name="M:NetConf.Xncf.Admin.Controllers.OrdersController.ListAsync(System.String,System.Int32,System.Int32)">
+        <member name="M:NetConf.Xncf.Admin.Controllers.OrdersController.ListAsync(System.String,System.Int32,System.Int32,System.Int32)">
             <summary>
-            订单列表
+            订单列表/我的订单(1-待支付;2-已支付;3-待评价;4-已完成;5-已取消;99-购物车;)
             </summary>
             <param name="userId">用户Id</param>
+            <param name="status">订单状态</param>
             <param name="pageIndex">页码</param>
             <param name="pageSize">页大小</param>
             <returns></returns>
@@ -147,10 +148,11 @@
             消息接口
             </summary>
         </member>
-        <member name="M:NetConf.Xncf.Admin.Controllers.TransactionsController.GetListAsync(System.Int32,System.Int32)">
+        <member name="M:NetConf.Xncf.Admin.Controllers.TransactionsController.GetListAsync(System.String,System.Int32,System.Int32)">
             <summary>
-            获取分类列表
+            获取交易记录
             </summary>
+            <param name="userId">用户Id</param>
             <param name="pageIndex">页码</param>
             <param name="pageSize">页大小</param>
             <returns></returns>

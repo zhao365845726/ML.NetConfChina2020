@@ -73,18 +73,19 @@ namespace NetConf.Xncf.Admin.Controllers
         }
 
         /// <summary>
-        /// 订单列表
+        /// 订单列表/我的订单(1-待支付;2-已支付;3-待评价;4-已完成;5-已取消;99-购物车;)
         /// </summary>
         /// <param name="userId">用户Id</param>
+        /// <param name="status">订单状态</param>
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">页大小</param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> ListAsync(string userId,int pageIndex, int pageSize)
+        public async Task<IActionResult> ListAsync(string userId,int status,int pageIndex, int pageSize)
         {
             try
             {
-                var response = await ordersService.ApiGetListAsync(userId,pageIndex, pageSize);
+                var response = await ordersService.ApiGetListAsync(userId,status,pageIndex, pageSize);
                 return Success(response);
             }
             catch (Exception ex)
