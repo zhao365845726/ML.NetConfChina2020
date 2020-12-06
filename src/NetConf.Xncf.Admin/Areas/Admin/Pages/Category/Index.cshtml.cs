@@ -41,10 +41,10 @@ namespace NetConf.Xncf.Admin.Areas.Admin.Pages.Category
             return Task.CompletedTask;
         }
 
-        public async Task<IActionResult> OnGetCategoryAsync(string name, string orderField, int pageIndex, int pageSize)
+        public async Task<IActionResult> OnGetCategoryAsync(string keyword, string orderField, int pageIndex, int pageSize)
         {
             var seh = new SenparcExpressionHelper<Models.DatabaseModel.Category>();
-            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(name), _ => _.Name.Contains(name));
+            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(keyword), _ => _.Name.Contains(keyword));
             var where = seh.BuildWhereExpression();
             var response = await _categoryService.GetObjectListAsync(pageIndex, pageSize, where, orderField);
             return Ok(new

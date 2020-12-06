@@ -41,10 +41,10 @@ namespace NetConf.Xncf.Admin.Areas.Admin.Pages.Orders
             return Task.CompletedTask;
         }
 
-        public async Task<IActionResult> OnGetOrdersAsync(string name, string orderField, int pageIndex, int pageSize)
+        public async Task<IActionResult> OnGetOrdersAsync(string keyword, string orderField, int pageIndex, int pageSize)
         {
             var seh = new SenparcExpressionHelper<Models.DatabaseModel.Orders>();
-            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(name), _ => _.OrderNum.Contains(name));
+            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(keyword), _ => _.OrderNum.Contains(keyword));
             var where = seh.BuildWhereExpression();
             var response = await _ordersService.GetObjectListAsync(pageIndex, pageSize, where, orderField);
             return Ok(new

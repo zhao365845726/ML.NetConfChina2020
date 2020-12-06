@@ -134,7 +134,7 @@ new Vue({
                 orderField = 'AddTime Desc';
             }
             if (that.keyword != '' && that.keyword != undefined) {
-                title = that.keyword;
+                keyword = that.keyword;
             }
 
             await service.get(`/Admin/Products/Index?handler=Products&pageIndex=${pageIndex}&pageSize=${pageSize}&keyword=${keyword}&orderField=${orderField}`).then(res => {

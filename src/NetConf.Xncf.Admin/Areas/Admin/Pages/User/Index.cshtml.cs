@@ -41,10 +41,10 @@ namespace NetConf.Xncf.Admin.Areas.Admin.Pages.User
             return Task.CompletedTask;
         }
 
-        public async Task<IActionResult> OnGetUserAsync(string name, string orderField, int pageIndex, int pageSize)
+        public async Task<IActionResult> OnGetUserAsync(string keyword, string orderField, int pageIndex, int pageSize)
         {
             var seh = new SenparcExpressionHelper<Models.DatabaseModel.User>();
-            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(name), _ => _.Name.Contains(name));
+            seh.ValueCompare.AndAlso(!string.IsNullOrEmpty(keyword), _ => _.Account.Contains(keyword) || _.NickName.Contains(keyword));
             var where = seh.BuildWhereExpression();
             var response = await _userService.GetObjectListAsync(pageIndex, pageSize, where, orderField);
             return Ok(new

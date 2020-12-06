@@ -27,6 +27,10 @@
         .hidden {
             display: none;
         }
+        .col-thumb img {
+            width: 4rem;
+            height: 4rem;
+        }
     </style>
 }
 
@@ -60,9 +64,10 @@
                 </template>
             </el-table-column>
 
-            <el-table-column prop="categoryId" align="left" label="分类Id"></el-table-column>
+            @*<el-table-column prop="categoryId" align="left" label="分类Id"></el-table-column>*@
+            <el-table-column prop="categoryName" align="left" label="分类名称"></el-table-column>
             <el-table-column prop="name" align="left" label="商品名称"></el-table-column>
-            <el-table-column prop="cover" align="center" label="封面图">
+            <el-table-column prop="cover" class-name="col-thumb" align="center" label="封面图">
                 <template slot-scope="scope">
                     <a :href="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/lelinggusu/work_1.jpg'" target="_blank">
                         <img :src="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/lelinggusu/work_1.jpg'">
