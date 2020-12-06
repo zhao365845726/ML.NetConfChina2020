@@ -535,9 +535,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NetConf.Xncf.2020\NetConf.Xncf.2020.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\NetConf.Xncf.Admin\NetConf.Xncf.Admin.csproj" />
+    <ProjectReference Include="..\Senparc.Xncf.Swagger\Senparc.Xncf.Swagger.csproj" />
   </ItemGroup>
 </Project>

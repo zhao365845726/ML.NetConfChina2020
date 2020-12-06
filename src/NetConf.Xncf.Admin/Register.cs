@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define RELEASE
+
+using System;
 using System.Collections.Generic;
 using Senparc.Ncf.XncfBase;
 using NetConf.Xncf.Admin.Functions;
@@ -9,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Senparc.Ncf.Database;
+using Microsoft.Extensions.Configuration;
+using Senparc.Weixin.RegisterServices;
 
 namespace NetConf.Xncf.Admin
 {
@@ -68,7 +72,21 @@ namespace NetConf.Xncf.Admin
 
             await unsinstallFunc().ConfigureAwait(false);
         }
-        
+
+#if RELEASE
+        //生成之前先注释一下代码
+        /// <summary>
+        /// 模块自定义配置文件
+        /// </summary>
+        public static IConfiguration FileServerConfiguration;
+
+        public override IServiceCollection AddXncfModule(IServiceCollection services, IConfiguration configuration)
+        {
+            FileServerConfiguration = new ConfigurationBuilder().AddJsonFile("fileserverconfig.json", optional: true, reloadOnChange: true).Build();
+            services.AddSenparcWeixinServices(configuration);
+            return base.AddXncfModule(services, configuration);
+        }
+#endif
         #endregion
     }
 }

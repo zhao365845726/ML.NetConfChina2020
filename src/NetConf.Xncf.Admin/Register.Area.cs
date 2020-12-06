@@ -19,11 +19,11 @@ namespace NetConf.Xncf.Admin
 		public string HomeUrl => "/Admin/Admin/Index";
 
 		public List<AreaPageMenuItem> AareaPageMenuItems => new List<AreaPageMenuItem>() {
-            new AreaPageMenuItem("/Admin/User/Index","用户管理","fa fa-laptop"),
-             new AreaPageMenuItem("/Admin/Category/Index","分类管理","fa fa-laptop"),
-			 new AreaPageMenuItem("/Admin/Products/Index","商品管理","fa fa-laptop"),
-			 new AreaPageMenuItem("/Admin/Orders/Index","订单管理","fa fa-laptop"),
-			 new AreaPageMenuItem("/Admin/Transactions/Index","交易记录","fa fa-laptop"),
+            new AreaPageMenuItem(GetAreaUrl("/Admin/User/Index"),"用户管理","fa fa-laptop"),
+             new AreaPageMenuItem(GetAreaUrl("/Admin/Category/Index"),"分类管理","fa fa-laptop"),
+			 new AreaPageMenuItem(GetAreaUrl("/Admin/Products/Index"),"商品管理","fa fa-laptop"),
+			 new AreaPageMenuItem(GetAreaUrl("/Admin/Orders/Index"),"订单管理","fa fa-laptop"),
+			 new AreaPageMenuItem(GetAreaUrl("/Admin/Transactions/Index"),"交易记录","fa fa-laptop"),
                      };
 
 		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IHostEnvironment env)
