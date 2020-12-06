@@ -38,3 +38,5 @@
 ## 接口地址
 
 https://localhost:44311/senparc-api-docs/index.html
+
+http://netconf.milisx.com/senparc-api-docs/index.html

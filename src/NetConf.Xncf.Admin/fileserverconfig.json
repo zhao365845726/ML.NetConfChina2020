@@ -25,7 +25,7 @@
     "Cors": {
         "Domain": {
             "0": "localhost",
-            "1": "https://htlx.milisx.xyz",
+            "1": "http://netconf.milisx.com",
             "2": "192.168.0.114"
         }
     }
