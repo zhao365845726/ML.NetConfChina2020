@@ -63,6 +63,7 @@ namespace NetConf.Xncf.Admin.Areas.Admin.Pages.Products
                             _.Cover,
                             _.Video,
                             _.Content,
+                            _.Price,
                             _.AddTime,
                             CategoryName = categoryList.Where(z => z.Id.Equals(_.CategoryId)).Select(z => z.Name)
                         })

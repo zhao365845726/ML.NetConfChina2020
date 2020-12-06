@@ -82,7 +82,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
         public decimal PaidAmount { get; set; }
 
         /// <summary>
-        /// 订单状态
+        /// 订单状态(1-待支付;2-已支付;3-待评价;4-已完成;5-已取消;99-购物车;)
         /// </summary>
         public int Status { get; set; }
 

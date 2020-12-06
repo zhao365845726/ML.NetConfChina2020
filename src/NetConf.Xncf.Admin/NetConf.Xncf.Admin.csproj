@@ -3,11 +3,14 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DocumentationFile></DocumentationFile>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <DocumentationFile>.\NetConf.Xncf.Admin.xml</DocumentationFile>
+    </PropertyGroup>
     <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <DocumentationFile>.\ML.Xncf.Admin.xml</DocumentationFile>
-    </PropertyGroup>-->
-    <!--<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <DocumentationFile>..\Senparc.Web\bin\Release\netcoreapp3.1\publish1\ML.Xncf.Admin.xml</DocumentationFile>
+        <DocumentationFile>..\Senparc.Web\bin\Release\netcoreapp3.1\publish1\NetConf.Xncf.Admin.xml</DocumentationFile>
         <OutputPath>..\Senparc.Web\bin\Release\netcoreapp3.1\publish1\</OutputPath>
     </PropertyGroup>-->
     <ItemGroup>

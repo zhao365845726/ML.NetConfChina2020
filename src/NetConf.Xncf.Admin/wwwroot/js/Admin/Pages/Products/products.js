@@ -46,7 +46,7 @@ new Vue({
                 visible: false,
                 data:
                 {
-                    id:'',categoryId: '', name: '', cover: '', video: '', content: ''
+                    id:'',categoryId: '', name: '', cover: '', video: '', content: '',price:0
                 },
                 rules:
                 {
@@ -73,7 +73,7 @@ new Vue({
             if (!val)
             {
                 this.dialog.data = {
-                    id:'',categoryId: '', name: '', cover: '', video: '', content: ''
+                    id: '', categoryId: '', name: '', cover: '', video: '', content: '', price: 0
                 };
                 this.dialog.updateLoading = false;
                 this.dialog.disabled = false;
@@ -168,9 +168,9 @@ new Vue({
                 return;
             }
             // 编辑
-            let { id,categoryId, name, cover, video, content } = row;
+            let { id,categoryId, name, cover, video, content,price } = row;
             that.dialog.data = {
-                id,categoryId, name, cover, video, content
+                id,categoryId, name, cover, video, content,price
             };
             //if (cover != '' && cover != undefined)
             //{
@@ -234,7 +234,8 @@ new Vue({
                         Name: that.dialog.data.name,
                         Cover: that.dialog.data.cover,
                         Video: that.dialog.data.video,
-                        Content: that.dialog.data.content
+                        Content: that.dialog.data.content,
+                        Price: that.dialog.data.price
                     };
                     console.log('add-' + JSON.stringify(data));
                     service.post("/Admin/Products/Edit?handler=Save", data).then(res => {

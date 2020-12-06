@@ -26,7 +26,7 @@ namespace NetConf.Xncf.Admin.Controllers
     /// </summary>
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]
-    [ApiVersion("1")]
+    [ApiVersion("2")]
     public class CommonController : BaseController
     {
         private readonly IOptionsMonitor<StaticResourceSetting> staticResourceSetting;

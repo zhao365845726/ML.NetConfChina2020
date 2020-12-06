@@ -27,6 +27,7 @@
         .hidden {
             display: none;
         }
+
         .col-thumb img {
             width: 4rem;
             height: 4rem;
@@ -144,6 +145,9 @@
 
                 <el-form-item label="内容" prop="content">
                     <el-input v-model="dialog.data.content" clearable placeholder="请输入内容" />
+                </el-form-item>
+                <el-form-item label="价格" prop="price">
+                    <el-input v-model="dialog.data.price" clearable placeholder="请输入价格" />
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">

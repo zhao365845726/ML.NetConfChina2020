@@ -32,6 +32,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
             Cover = productsDto.Cover;
             Video = productsDto.Video;
             Content = productsDto.Content;
+            Price = productsDto.Price;
         }
 
         public void Update(ProductsDto productsDto)
@@ -42,6 +43,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
             Cover = productsDto.Cover;
             Video = productsDto.Video;
             Content = productsDto.Content;
+            Price = productsDto.Price;
         }
 
         /// <summary>
@@ -73,6 +75,11 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
         /// </summary>
         [MaxLength(5000)]
         public string Content { get; set; }
+
+        /// <summary>
+        /// 商品价格
+        /// </summary>
+        public decimal Price { get; set; }
 
     }
 }

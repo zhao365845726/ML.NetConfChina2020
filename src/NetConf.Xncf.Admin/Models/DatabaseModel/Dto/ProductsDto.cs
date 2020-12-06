@@ -14,7 +14,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel.Dto
         {
         }
 
-        public ProductsDto(string id, string categoryId, string name, string cover, string video, string content)
+        public ProductsDto(string id, string categoryId, string name, string cover, string video, string content, decimal price)
         {
             Id = id;
             CategoryId = categoryId;
@@ -22,6 +22,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel.Dto
             Cover = cover;
             Video = video;
             Content = content;
+            Price = price;
         }
 
         public string Id { get; set; }
@@ -55,6 +56,11 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel.Dto
         /// </summary>
         [MaxLength(5000)]
         public string Content { get; set; }
+
+        /// <summary>
+        /// 商品价格
+        /// </summary>
+        public decimal Price { get; set; }
 
     }
 }
