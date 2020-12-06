@@ -1,9 +1,12 @@
+
+using Senparc.Ncf.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
-using Senparc.Ncf.Core.Models;
+using System.Text;
+
+using NetConf.Xncf.Admin.Models.DatabaseModel.Dto;
 
 namespace NetConf.Xncf.Admin.Models.DatabaseModel
 {
@@ -21,40 +24,67 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
             this.LastUpdateTime = AddTime;
         }
 
+        public Orders(OrdersDto ordersDto) : this()
+        {
+            LastUpdateTime = ordersDto.LastUpdateTime;
+            OrderNum = ordersDto.OrderNum;
+            ProductId = ordersDto.ProductId;
+            UserId = ordersDto.UserId;
+            Number = ordersDto.Number;
+            Amount = ordersDto.Amount;
+            PaidAmount = ordersDto.PaidAmount;
+            Status = ordersDto.Status;
+        }
+
+        public void Update(OrdersDto ordersDto)
+        {
+            LastUpdateTime = ordersDto.LastUpdateTime;
+            OrderNum = ordersDto.OrderNum;
+            ProductId = ordersDto.ProductId;
+            UserId = ordersDto.UserId;
+            Number = ordersDto.Number;
+            Amount = ordersDto.Amount;
+            PaidAmount = ordersDto.PaidAmount;
+            Status = ordersDto.Status;
+        }
+
         /// <summary>
         /// 订单编号
         /// </summary>
-        [MaxLength(50), Description("string|OrderNum|订单编号|50")]
+        [MaxLength(50)]
         public string OrderNum { get; set; }
+
         /// <summary>
         /// 商品Id
         /// </summary>
-        [MaxLength(50), Description("string|ProductId|商品Id|50")]
+        [MaxLength(50)]
         public string ProductId { get; set; }
+
         /// <summary>
         /// 用户Id
         /// </summary>
-        [MaxLength(50), Description("string|UserId|用户Id|50")]
+        [MaxLength(50)]
         public string UserId { get; set; }
+
         /// <summary>
         /// 数量
         /// </summary>
-        [Description("int|Number|数量")]
         public int Number { get; set; }
+
         /// <summary>
         /// 金额
         /// </summary>
-        [Description("decimal|Amount|金额")]
         public decimal Amount { get; set; }
+
         /// <summary>
         /// 实付金额
         /// </summary>
-        [Description("decimal|PaidAmount|实付金额")]
         public decimal PaidAmount { get; set; }
+
         /// <summary>
-        /// 订单状态(1-待支付;2-已支付;3-待评价;4-已完成;99-购物车;)
+        /// 订单状态
         /// </summary>
-        [Description("int|Status|订单状态")]
         public int Status { get; set; }
+
     }
 }

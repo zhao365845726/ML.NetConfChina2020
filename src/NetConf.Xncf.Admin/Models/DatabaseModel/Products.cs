@@ -1,9 +1,12 @@
+
+using Senparc.Ncf.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
-using Senparc.Ncf.Core.Models;
+using System.Text;
+
+using NetConf.Xncf.Admin.Models.DatabaseModel.Dto;
 
 namespace NetConf.Xncf.Admin.Models.DatabaseModel
 {
@@ -21,30 +24,55 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
             this.LastUpdateTime = AddTime;
         }
 
+        public Products(ProductsDto productsDto) : this()
+        {
+            LastUpdateTime = productsDto.LastUpdateTime;
+            CategoryId = productsDto.CategoryId;
+            Name = productsDto.Name;
+            Cover = productsDto.Cover;
+            Video = productsDto.Video;
+            Content = productsDto.Content;
+        }
+
+        public void Update(ProductsDto productsDto)
+        {
+            LastUpdateTime = productsDto.LastUpdateTime;
+            CategoryId = productsDto.CategoryId;
+            Name = productsDto.Name;
+            Cover = productsDto.Cover;
+            Video = productsDto.Video;
+            Content = productsDto.Content;
+        }
+
         /// <summary>
         /// 分类Id
         /// </summary>
-        [MaxLength(50), Description("string|CategoryId|分类Id|50")]
+        [MaxLength(50)]
         public string CategoryId { get; set; }
+
         /// <summary>
         /// 商品名称
         /// </summary>
-        [MaxLength(50), Description("string|Name|商品名称|50")]
+        [MaxLength(50)]
         public string Name { get; set; }
+
         /// <summary>
-        /// 封面图
+        /// 商品名称
         /// </summary>
-        [MaxLength(200), Description("string|Cover|商品名称|200")]
+        [MaxLength(200)]
         public string Cover { get; set; }
+
         /// <summary>
-        /// 视频简介
+        /// 商品名称
         /// </summary>
-        [MaxLength(200), Description("string|Video|商品名称|200")]
+        [MaxLength(200)]
         public string Video { get; set; }
+
         /// <summary>
-        /// 内容
+        /// 商品名称
         /// </summary>
-        [MaxLength(5000), Description("string|Content|商品名称|5000")]
+        [MaxLength(5000)]
         public string Content { get; set; }
+
     }
 }

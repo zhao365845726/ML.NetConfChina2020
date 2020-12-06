@@ -1,9 +1,12 @@
+
+using Senparc.Ncf.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
-using Senparc.Ncf.Core.Models;
+using System.Text;
+
+using NetConf.Xncf.Admin.Models.DatabaseModel.Dto;
 
 namespace NetConf.Xncf.Admin.Models.DatabaseModel
 {
@@ -21,30 +24,52 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
             this.LastUpdateTime = AddTime;
         }
 
+        public Transactions(TransactionsDto transactionsDto) : this()
+        {
+            LastUpdateTime = transactionsDto.LastUpdateTime;
+            OrderNum = transactionsDto.OrderNum;
+            Status = transactionsDto.Status;
+            UserId = transactionsDto.UserId;
+            Quota = transactionsDto.Quota;
+            Method = transactionsDto.Method;
+        }
+
+        public void Update(TransactionsDto transactionsDto)
+        {
+            LastUpdateTime = transactionsDto.LastUpdateTime;
+            OrderNum = transactionsDto.OrderNum;
+            Status = transactionsDto.Status;
+            UserId = transactionsDto.UserId;
+            Quota = transactionsDto.Quota;
+            Method = transactionsDto.Method;
+        }
+
         /// <summary>
         /// 订单编号
         /// </summary>
-        [MaxLength(50), Description("string|OrderNum|订单编号|50")]
+        [MaxLength(50)]
         public string OrderNum { get; set; }
+
         /// <summary>
         /// 交易状态(1-待处理;2-已处理;)
         /// </summary>
-        [Description("int|Status|交易状态(1-待处理;2-已处理;)")]
         public int Status { get; set; }
+
         /// <summary>
         /// 用户Id
         /// </summary>
-        [MaxLength(50), Description("string|UserId|用户Id|50")]
+        [MaxLength(50)]
         public string UserId { get; set; }
+
         /// <summary>
         /// 交易金额
         /// </summary>
-        [Description("decimal|Quota|交易金额")]
         public decimal Quota { get; set; }
+
         /// <summary>
         /// 支付方式(1-微信;2-支付宝;3-账户余额;)
         /// </summary>
-        [Description("int|Method|支付方式(1-微信;2-支付宝;3-账户余额;)")]
         public int Method { get; set; }
+
     }
 }

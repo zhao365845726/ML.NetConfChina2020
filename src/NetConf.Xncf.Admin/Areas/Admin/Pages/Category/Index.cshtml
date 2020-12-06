@@ -1,0 +1,117 @@
+@page
+@model NetConf.Xncf.Admin.Areas.Admin.Pages.Category.IndexModel
+@{
+    ViewData["Title"] = "Category列表页面";
+    Layout = "_Layout_Vue";
+}
+
+@section Style{
+    <link href="~/css/Admin/Category/Category.css" rel="stylesheet" />
+}
+
+@section HeaderContent{
+    <style>
+        .el-dialog .el-form-item .el-input,
+        .el-dialog .el-form-item .el-textarea {
+            width: 30rem;
+        }
+
+        .el-form-item__content {
+            width: 30rem;
+        }
+
+        .filter-condition {
+            margin-bottom: 1rem;
+        }
+        .hidden{ display: none; }
+    </style>
+}
+
+@section breadcrumbs {
+    <el-breadcrumb-item>扩展模块</el-breadcrumb-item>
+    <el-breadcrumb-item>Category管理</el-breadcrumb-item>
+    <el-breadcrumb-item>Category列表</el-breadcrumb-item>
+}
+
+<div>
+    <div class="admin-role">
+        <el-row class="filter-condition" :gutter="18">
+            <el-col :span="4"><el-input v-model="keyword" placeholder="请输入关键字"></el-input></el-col>
+            <el-col :span="6">
+                <el-button type="primary" @@click="handleSearch()">查询</el-button>
+                <el-button type="primary" @@click="resetCondition()">重置</el-button>
+            </el-col>
+        </el-row>
+        <div class="filter-container">
+            <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加Category</el-button>
+        </div>
+        <el-table :data="tableData"
+                  style="width: 100%;margin-bottom: 20px;"
+                  row-key="id"
+                  border
+                  ref="multipleTable"
+                  @@selection-change="handleSelectionChange">
+            <el-table-column label="序号" width="65">
+                <template scope="scope">
+                    <el-radio :label="scope.$index" v-model="radio" @@change.native="getCurrentRow(scope.row)"></el-radio>
+                </template>
+            </el-table-column>
+
+                     <el-table-column prop="name" align="left" label="分类名称"></el-table-column>
+                     <el-table-column prop="sort" align="left" label="排序"></el-table-column>
+                     <el-table-column prop="pid" align="left" label="父级id"></el-table-column>
+            <el-table-column align = "center"
+                             label="添加时间">
+                <template slot-scope="scope">
+                    {{formaTableTime(scope.row.addTime)}}
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" align="center" fixed="right" width="150">
+                <template slot-scope="scope">
+                    <el-button size="mini"
+                        type="primary"
+                        @@click="handleEdit(scope.$index, scope.row,'edit')">编辑</el-button>
+                    <el-popconfirm placement="top" title="确认删除此作品吗？" @@on-confirm="handleDelete(scope.$index, scope.row)">
+                        <el-button size="mini" type="danger" slot="reference">删除</el-button>
+                    </el-popconfirm>
+                </template>
+            </el-table-column>
+        </el-table>
+              
+        <pagination :total="paginationQuery.total"
+                :page.sync="listQuery.pageIndex"
+                :limit.sync="listQuery.pageSize"
+                @@pagination="getList"></pagination>
+        <!--编辑、新增-->
+         <el-dialog :title="dialog.title"
+                   :visible.sync="dialog.visible"
+                   :close-on-click-modal="false"
+                   width = "50%" >
+            <el-form ref="dataForm"
+                     :rules = "dialog.rules"
+                     :model = "dialog.data"
+                     :disabled = "dialog.disabled"
+                     label-position = "left"
+                     label-width = "100px"
+                     style= "max-width: 200px; margin-left:50px;" >
+                     <el-form-item label="分类名称" prop="name">
+                         <el-input v-model="dialog.data.name" clearable placeholder="请输入分类名称"/>
+                     </el-form-item>
+
+                     <el-form-item label="父级id" prop="pid">
+                         <el-input v-model="dialog.data.pid" clearable placeholder="请输入父级id"/>
+                     </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @@click="dialog.visible=false">取消</el-button>
+                <el-button :loading="dialog.updateLoading" :disabled="dialog.disabled" type="primary" @@click="updateData">确认</el-button>
+            </div>
+        </el-dialog>
+    </div>
+</div>
+@section scripts
+{
+    <script src="~/js/Basic/ml.js"></script>
+
+    <script src="~/js/Admin/Pages/Category/category.js"></script>
+}

@@ -1,9 +1,12 @@
+
+using Senparc.Ncf.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel;
-using Senparc.Ncf.Core.Models;
+using System.Text;
+
+using NetConf.Xncf.Admin.Models.DatabaseModel.Dto;
 
 namespace NetConf.Xncf.Admin.Models.DatabaseModel
 {
@@ -21,20 +24,38 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
             this.LastUpdateTime = AddTime;
         }
 
+        public Category(CategoryDto categoryDto) : this()
+        {
+            LastUpdateTime = categoryDto.LastUpdateTime;
+            Name = categoryDto.Name;
+            Sort = categoryDto.Sort;
+            Pid = categoryDto.Pid;
+        }
+
+        public void Update(CategoryDto categoryDto)
+        {
+            LastUpdateTime = categoryDto.LastUpdateTime;
+            Name = categoryDto.Name;
+            Sort = categoryDto.Sort;
+            Pid = categoryDto.Pid;
+        }
+
         /// <summary>
         /// 分类名称
         /// </summary>
-        [MaxLength(500), Description("string|Name|分类名称|500")]
+        [MaxLength(500)]
         public string Name { get; set; }
+
         /// <summary>
         /// 排序
         /// </summary>
-        [Description("int|Sort|排序")]
         public int Sort { get; set; }
+
         /// <summary>
         /// 父级id
         /// </summary>
-        [MaxLength(50), Description("string|Pid|父级id|50")]
+        [MaxLength(50)]
         public string Pid { get; set; }
+
     }
 }
