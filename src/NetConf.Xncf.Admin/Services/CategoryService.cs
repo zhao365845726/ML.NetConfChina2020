@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using NetConf.Xncf.Admin.Models.DatabaseModel;
 using NetConf.Xncf.Admin.Models.DatabaseModel.Dto;
+using Senparc.Ncf.Utility;
+
 namespace NetConf.Xncf.Admin.Services
 {
     public class CategoryService : ServiceBase<Category>
@@ -40,6 +42,20 @@ namespace NetConf.Xncf.Admin.Services
             await SaveObjectAsync(category);
         }
 
+        #region 接口
+        public async Task<object> ApiGetListAsync(int pageIndex, int pageSize)
+        {
+            List<CategoryDto> selectListItems = null;
+            var seh = new SenparcExpressionHelper<Models.DatabaseModel.Category>();
+            var where = seh.BuildWhereExpression();
+            List<Category> category = (await base.GetObjectListAsync(pageIndex, pageSize, where, "AddTime Desc")).ToList();
+            return category.Select(_ => new
+            {
+                _.Id,
+                _.Name
+            });
+        }
+        #endregion
     }
 
 }

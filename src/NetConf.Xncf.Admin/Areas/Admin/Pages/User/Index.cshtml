@@ -23,6 +23,9 @@
         .filter-condition {
             margin-bottom: 1rem;
         }
+        .el-form-item .el-input__inner {
+            width: 180px;
+        }
         .hidden{ display: none; }
     </style>
 }
@@ -89,7 +92,7 @@
          <el-dialog :title="dialog.title"
                    :visible.sync="dialog.visible"
                    :close-on-click-modal="false"
-                   width = "700px" >
+                   width = "400px" >
             <el-form ref="dataForm"
                      :rules = "dialog.rules"
                      :model = "dialog.data"

@@ -23,7 +23,12 @@
         .filter-condition {
             margin-bottom: 1rem;
         }
-        .hidden{ display: none; }
+        .el-form-item .el-input__inner {
+            width: 180px;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 }
 
@@ -86,7 +91,7 @@
          <el-dialog :title="dialog.title"
                    :visible.sync="dialog.visible"
                    :close-on-click-modal="false"
-                   width = "700px" >
+                   width = "400px" >
             <el-form ref="dataForm"
                      :rules = "dialog.rules"
                      :model = "dialog.data"
@@ -101,6 +106,10 @@
                      <el-form-item label="父级id" prop="pid">
                          <el-input v-model="dialog.data.pid" clearable placeholder="请输入父级id"/>
                      </el-form-item>
+
+                     <el-form-item label="排序" prop="sort">
+                         <el-input-number v-model="dialog.data.sort" :min="1" :max="999" label="请输入排序"></el-input-number>
+                     </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @@click="dialog.visible=false">取消</el-button>
@@ -112,6 +121,5 @@
 @section scripts
 {
     <script src="~/js/Basic/ml.js"></script>
-
     <script src="~/js/Admin/Pages/Category/category.js"></script>
 }

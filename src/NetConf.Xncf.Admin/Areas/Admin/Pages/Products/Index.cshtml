@@ -23,7 +23,10 @@
         .filter-condition {
             margin-bottom: 1rem;
         }
-        .hidden{ display: none; }
+
+        .hidden {
+            display: none;
+        }
     </style>
 }
 
@@ -57,18 +60,18 @@
                 </template>
             </el-table-column>
 
-                     <el-table-column prop="categoryId" align="left" label="分类Id"></el-table-column>
-                     <el-table-column prop="name" align="left" label="商品名称"></el-table-column>
-                     <el-table-column prop="cover" align="center" label="商品名称">
-                       <template slot-scope="scope">
-                           <a :href="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/lelinggusu/work_1.jpg'" target="_blank">
-                               <img :src="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/lelinggusu/work_1.jpg'">
-                           </a>
-                       </template>
-                     </el-table-column>
-                     <el-table-column prop="video" align="left" label="商品名称"></el-table-column>
-                     <el-table-column prop="content" align="left" label="商品名称"></el-table-column>
-            <el-table-column align = "center"
+            <el-table-column prop="categoryId" align="left" label="分类Id"></el-table-column>
+            <el-table-column prop="name" align="left" label="商品名称"></el-table-column>
+            <el-table-column prop="cover" align="center" label="封面图">
+                <template slot-scope="scope">
+                    <a :href="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/lelinggusu/work_1.jpg'" target="_blank">
+                        <img :src="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/lelinggusu/work_1.jpg'">
+                    </a>
+                </template>
+            </el-table-column>
+            <el-table-column prop="video" align="left" label="视频简介"></el-table-column>
+            <el-table-column prop="content" align="left" label="内容"></el-table-column>
+            <el-table-column align="center"
                              label="添加时间">
                 <template slot-scope="scope">
                     {{formaTableTime(scope.row.addTime)}}
@@ -77,61 +80,66 @@
             <el-table-column label="操作" align="center" fixed="right" width="150">
                 <template slot-scope="scope">
                     <el-button size="mini"
-                        type="primary"
-                        @@click="handleEdit(scope.$index, scope.row,'edit')">编辑</el-button>
+                               type="primary"
+                               @@click="handleEdit(scope.$index, scope.row,'edit')">编辑</el-button>
                     <el-popconfirm placement="top" title="确认删除此作品吗？" @@on-confirm="handleDelete(scope.$index, scope.row)">
                         <el-button size="mini" type="danger" slot="reference">删除</el-button>
                     </el-popconfirm>
                 </template>
             </el-table-column>
         </el-table>
-              
+
         <pagination :total="paginationQuery.total"
-                :page.sync="listQuery.pageIndex"
-                :limit.sync="listQuery.pageSize"
-                @@pagination="getList"></pagination>
+                    :page.sync="listQuery.pageIndex"
+                    :limit.sync="listQuery.pageSize"
+                    @@pagination="getList"></pagination>
         <!--编辑、新增-->
-         <el-dialog :title="dialog.title"
+        <el-dialog :title="dialog.title"
                    :visible.sync="dialog.visible"
                    :close-on-click-modal="false"
-                   width = "700px" >
+                   width="700px">
             <el-form ref="dataForm"
-                     :rules = "dialog.rules"
-                     :model = "dialog.data"
-                     :disabled = "dialog.disabled"
-                     label-position = "left"
-                     label-width = "100px"
-                     style= "max-width: 200px; margin-left:50px;" >
-                     <el-form-item label="分类Id" prop="categoryId">
-                         <el-input v-model="dialog.data.categoryId" clearable placeholder="请输入分类Id"/>
-                     </el-form-item>
+                     :rules="dialog.rules"
+                     :model="dialog.data"
+                     :disabled="dialog.disabled"
+                     label-position="left"
+                     label-width="100px"
+                     style="max-width: 200px; margin-left:50px;">
+                <el-form-item label="分类Id">
+                    <el-cascader v-model="selectCategory"
+                                 :options="categoryData"
+                                 @@change="selectType"
+                                 clearable
+                                 :props="{label:'name',value:'id',emitPath:true}">
+                    </el-cascader>
+                </el-form-item>
 
-                     <el-form-item label="商品名称" prop="name">
-                         <el-input v-model="dialog.data.name" clearable placeholder="请输入商品名称"/>
-                     </el-form-item>
+                <el-form-item label="商品名称" prop="name">
+                    <el-input v-model="dialog.data.name" clearable placeholder="请输入商品名称" />
+                </el-form-item>
 
-                     <el-form-item label="商品名称">
-                         <el-upload action="@Model.UpFileUrl"
-                                    list-type="picture-card"
-                                    show-file-list="true"
-                                    accept="image/png, image/jpeg"
-                                    :on-success = "uploadSuccess"
-                                    :on-error = "uploadError"
-                                    :on-preview = "handlePictureCardPreview"
-                                    :on-remove = "handleRemove" >
-                             <i class="el-icon-plus"></i>
-                             <div class="el-upload__tip" slot="tip">不能超过100MB</div>
-                         </el-upload>
-                         <img width="100%" :src="dialogImageUrl" alt="">
-                         <el-input class="hidden" v-model="dialog.data.cover" clearable placeholder="商品名称"/>
-</el-form-item>
-                     <el-form-item label="商品名称" prop="video">
-                         <el-input v-model="dialog.data.video" clearable placeholder="请输入商品名称"/>
-                     </el-form-item>
+                <el-form-item label="封面图">
+                    <el-upload action="@Model.UpFileUrl"
+                               list-type="picture-card"
+                               show-file-list="true"
+                               accept="image/png, image/jpeg"
+                               :on-success="uploadSuccess"
+                               :on-error="uploadError"
+                               :on-preview="handlePictureCardPreview"
+                               :on-remove="handleRemove">
+                        <i class="el-icon-plus"></i>
+                        <div class="el-upload__tip" slot="tip">不能超过100MB</div>
+                    </el-upload>
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                    <el-input class="hidden" v-model="dialog.data.cover" clearable placeholder="封面图" />
+                </el-form-item>
+                <el-form-item label="视频简介" prop="video">
+                    <el-input v-model="dialog.data.video" clearable placeholder="请输入视频简介" />
+                </el-form-item>
 
-                     <el-form-item label="商品名称" prop="content">
-                         <el-input v-model="dialog.data.content" clearable placeholder="请输入商品名称"/>
-                     </el-form-item>
+                <el-form-item label="内容" prop="content">
+                    <el-input v-model="dialog.data.content" clearable placeholder="请输入内容" />
+                </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @@click="dialog.visible=false">取消</el-button>
@@ -143,6 +151,5 @@
 @section scripts
 {
     <script src="~/js/Basic/ml.js"></script>
-
     <script src="~/js/Admin/Pages/Products/products.js"></script>
 }

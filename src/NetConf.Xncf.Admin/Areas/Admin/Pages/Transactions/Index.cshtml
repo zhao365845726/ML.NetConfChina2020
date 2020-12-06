@@ -23,7 +23,10 @@
         .filter-condition {
             margin-bottom: 1rem;
         }
-        .hidden{ display: none; }
+
+        .hidden {
+            display: none;
+        }
     </style>
 }
 
@@ -35,16 +38,16 @@
 
 <div>
     <div class="admin-role">
-        <el-row class="filter-condition" :gutter="18">
+        @*<el-row class="filter-condition" :gutter="18">
             <el-col :span="4"><el-input v-model="keyword" placeholder="请输入关键字"></el-input></el-col>
             <el-col :span="6">
                 <el-button type="primary" @@click="handleSearch()">查询</el-button>
                 <el-button type="primary" @@click="resetCondition()">重置</el-button>
             </el-col>
-        </el-row>
-        <div class="filter-container">
-            <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加交易记录</el-button>
-        </div>
+        </el-row>*@
+        @*<div class="filter-container">
+                <el-button class="filter-item" size="mini" type="primary" icon="el-icon-plus" @@click="handleEdit('','','add')">增加交易记录</el-button>
+            </div>*@
         <el-table :data="tableData"
                   style="width: 100%;margin-bottom: 20px;"
                   row-key="id"
@@ -57,12 +60,12 @@
                 </template>
             </el-table-column>
 
-                     <el-table-column prop="orderNum" align="left" label="订单编号"></el-table-column>
-                     <el-table-column prop="status" align="left" label="交易状态(1-待处理;2-已处理;)"></el-table-column>
-                     <el-table-column prop="userId" align="left" label="用户Id"></el-table-column>
-                     <el-table-column prop="quota" align="left" label="交易金额"></el-table-column>
-                     <el-table-column prop="method" align="left" label="支付方式(1-微信;2-支付宝;3-账户余额;)"></el-table-column>
-            <el-table-column align = "center"
+            <el-table-column prop="orderNum" align="left" label="订单编号"></el-table-column>
+            <el-table-column prop="status" align="left" label="交易状态"></el-table-column>
+            <el-table-column prop="userId" align="left" label="用户Id"></el-table-column>
+            <el-table-column prop="quota" align="left" label="交易金额"></el-table-column>
+            <el-table-column prop="method" align="left" label="支付方式"></el-table-column>
+            <el-table-column align="center"
                              label="添加时间">
                 <template slot-scope="scope">
                     {{formaTableTime(scope.row.addTime)}}
@@ -70,45 +73,17 @@
             </el-table-column>
             <el-table-column label="操作" align="center" fixed="right" width="150">
                 <template slot-scope="scope">
-                    <el-button size="mini"
-                        type="primary"
-                        @@click="handleEdit(scope.$index, scope.row,'edit')">编辑</el-button>
                     <el-popconfirm placement="top" title="确认删除此作品吗？" @@on-confirm="handleDelete(scope.$index, scope.row)">
                         <el-button size="mini" type="danger" slot="reference">删除</el-button>
                     </el-popconfirm>
                 </template>
             </el-table-column>
         </el-table>
-              
-        <pagination :total="paginationQuery.total"
-                :page.sync="listQuery.pageIndex"
-                :limit.sync="listQuery.pageSize"
-                @@pagination="getList"></pagination>
-        <!--编辑、新增-->
-         <el-dialog :title="dialog.title"
-                   :visible.sync="dialog.visible"
-                   :close-on-click-modal="false"
-                   width = "700px" >
-            <el-form ref="dataForm"
-                     :rules = "dialog.rules"
-                     :model = "dialog.data"
-                     :disabled = "dialog.disabled"
-                     label-position = "left"
-                     label-width = "100px"
-                     style= "max-width: 200px; margin-left:50px;" >
-                     <el-form-item label="订单编号" prop="orderNum">
-                         <el-input v-model="dialog.data.orderNum" clearable placeholder="请输入订单编号"/>
-                     </el-form-item>
 
-                     <el-form-item label="用户Id" prop="userId">
-                         <el-input v-model="dialog.data.userId" clearable placeholder="请输入用户Id"/>
-                     </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button @@click="dialog.visible=false">取消</el-button>
-                <el-button :loading="dialog.updateLoading" :disabled="dialog.disabled" type="primary" @@click="updateData">确认</el-button>
-            </div>
-        </el-dialog>
+        <pagination :total="paginationQuery.total"
+                    :page.sync="listQuery.pageIndex"
+                    :limit.sync="listQuery.pageSize"
+                    @@pagination="getList"></pagination>
     </div>
 </div>
 @section scripts

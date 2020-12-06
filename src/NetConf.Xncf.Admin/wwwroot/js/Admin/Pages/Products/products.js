@@ -28,7 +28,8 @@ new Vue({
                 keyword: '',
                 orderField: ''
             },
-            categoryData:[],
+            categoryData: [],
+            selectCategory:'',
             keyword:'',
             multipleSelection: '',
             radio: '',
@@ -63,6 +64,7 @@ new Vue({
     created: function() {
         let that = this
         that.getList();
+        that.getCategoryList();
     },
     watch:
     {
@@ -144,7 +146,7 @@ new Vue({
         {
             let that = this
             //获取分类列表数据
-            await service.get('/Admin/Products/Index?handler=ProductsCategory').then(res => {
+            await service.get('/Admin/Category/Index?handler=Category').then(res => {
                 that.categoryData = res.data.data.list;
                 log('categoryData',res,2);
             });
@@ -153,6 +155,7 @@ new Vue({
         handleEdit(index, row, flag)
         {
             let that = this
+            that.selectCategory = '';
             that.dialog.visible = true;
             //获取分类列表数据
             //that.getCategoryList();
@@ -185,7 +188,8 @@ new Vue({
             //let x = [];
             //that.recursionFunc(row, this.categoryData, x);
             //that.dialog.data.categoryId = x;
-
+            //设置分类
+            that.selectCategory = categoryId;
             if (flag === 'edit')
             {
                 that.dialog.title = '编辑作品';
@@ -316,6 +320,15 @@ new Vue({
             }
             else {
                 return cellValue.replace(/<[^>]+>/gim, '').replace(/\[(\w+)[^\]]*](.*?)\[\/\1]/g, '$2 ').substring(0, 16);
+            }
+        },
+        selectType(event) {
+            let that = this
+            log('event', that.categoryData, 2)
+            for (let i = 0; i < that.categoryData.length; i++) {
+                if (that.selectCategory[0] == that.categoryData[i].id) {
+                    that.dialog.data.categoryId = that.categoryData[i].id;
+                }
             }
         }
     }
