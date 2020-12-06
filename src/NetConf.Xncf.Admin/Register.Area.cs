@@ -8,6 +8,10 @@ using Senparc.Ncf.XncfBase;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Builder;
+using Senparc.CO2NET.RegisterServices;
+using Microsoft.Extensions.FileProviders;
+using System.Reflection;
 
 namespace NetConf.Xncf.Admin
 {
@@ -36,6 +40,16 @@ namespace NetConf.Xncf.Admin
             SenparcTrace.SendCustomLog("Admin 启动", "完成 Area:NetConf.Xncf.Admin 注册");
 
             return builder;
+        }
+
+        public override IApplicationBuilder UseXncfModule(IApplicationBuilder app, IRegisterService registerService)
+        {
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new ManifestEmbeddedFileProvider(Assembly.GetExecutingAssembly(), "wwwroot")
+            });
+
+            return base.UseXncfModule(app, registerService);
         }
 
         #endregion

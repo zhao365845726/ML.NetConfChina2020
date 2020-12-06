@@ -21,3 +21,8 @@
 注意：本页面已经失效，请保存好管理员账号及密码，密码无法找回明文！
 
 > 点击这里登录 <
+
+
+## 接口地址
+
+https://localhost:44311/senparc-api-docs/index.html
