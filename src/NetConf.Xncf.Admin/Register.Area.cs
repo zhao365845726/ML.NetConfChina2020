@@ -11,37 +11,37 @@ using Microsoft.Extensions.Hosting;
 
 namespace NetConf.Xncf.Admin
 {
-	public partial class Register : IAreaRegister, //注册 XNCF 页面接口（按需选用）
-									IXncfRazorRuntimeCompilation  //赋能 RazorPage 运行时编译
-	{
-		#region IAreaRegister 接口
+    public partial class Register : IAreaRegister, //注册 XNCF 页面接口（按需选用）
+                                    IXncfRazorRuntimeCompilation  //赋能 RazorPage 运行时编译
+    {
+        #region IAreaRegister 接口
 
-		public string HomeUrl => "/Admin/Admin/Index";
+        public string HomeUrl => "/Admin/Admin/Index";
 
-		public List<AreaPageMenuItem> AareaPageMenuItems => new List<AreaPageMenuItem>() {
+        public List<AreaPageMenuItem> AareaPageMenuItems => new List<AreaPageMenuItem>() {
             new AreaPageMenuItem(GetAreaUrl("/Admin/User/Index"),"用户管理","fa fa-laptop"),
              new AreaPageMenuItem(GetAreaUrl("/Admin/Category/Index"),"分类管理","fa fa-laptop"),
-			 new AreaPageMenuItem(GetAreaUrl("/Admin/Products/Index"),"商品管理","fa fa-laptop"),
-			 new AreaPageMenuItem(GetAreaUrl("/Admin/Orders/Index"),"订单管理","fa fa-laptop"),
-			 new AreaPageMenuItem(GetAreaUrl("/Admin/Transactions/Index"),"交易记录","fa fa-laptop"),
+             new AreaPageMenuItem(GetAreaUrl("/Admin/Products/Index"),"商品管理","fa fa-laptop"),
+             new AreaPageMenuItem(GetAreaUrl("/Admin/Orders/Index"),"订单管理","fa fa-laptop"),
+             new AreaPageMenuItem(GetAreaUrl("/Admin/Transactions/Index"),"交易记录","fa fa-laptop"),
                      };
 
-		public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IHostEnvironment env)
-		{
-			builder.AddRazorPagesOptions(options =>
-			{
-				//此处可配置页面权限
-			});
+        public IMvcBuilder AuthorizeConfig(IMvcBuilder builder, IHostEnvironment env)
+        {
+            builder.AddRazorPagesOptions(options =>
+            {
+                //此处可配置页面权限
+            });
 
-			SenparcTrace.SendCustomLog("Admin 启动", "完成 Area:NetConf.Xncf.Admin 注册");
+            SenparcTrace.SendCustomLog("Admin 启动", "完成 Area:NetConf.Xncf.Admin 注册");
 
-			return builder;
-		}
+            return builder;
+        }
 
-		#endregion
+        #endregion
 
-		#region IXncfRazorRuntimeCompilation 接口
-		public string LibraryPath => Path.GetFullPath(Path.Combine(SiteConfig.WebRootPath, "..", "..", "NetConf.Xncf.Admin"));
-		#endregion
-	}
+        #region IXncfRazorRuntimeCompilation 接口
+        public string LibraryPath => Path.GetFullPath(Path.Combine(SiteConfig.WebRootPath, "..", "..", "NetConf.Xncf.Admin"));
+        #endregion
+    }
 }

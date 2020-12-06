@@ -35,18 +35,22 @@ namespace NetConf.Xncf.Admin
 
         public override IList<Type> Functions => new Type[] { typeof(MyFunction) };
 
+        /// <summary>
+        /// 调试模式
+        /// </summary>
+        public bool Debug => true;
 
-                public override async Task InstallOrUpdateAsync(IServiceProvider serviceProvider, InstallOrUpdate installOrUpdate)
+        public override async Task InstallOrUpdateAsync(IServiceProvider serviceProvider, InstallOrUpdate installOrUpdate)
         {
             //安装或升级版本时更新数据库
-            await base.MigrateDatabaseAsync(serviceProvider);
+            //await base.MigrateDatabaseAsync(serviceProvider);
 
             //根据安装或更新不同条件执行逻辑
             switch (installOrUpdate)
             {
                 case InstallOrUpdate.Install:
                     //新安装
-                                        break;
+                    break;
                 case InstallOrUpdate.Update:
                     //更新
                     break;
@@ -65,8 +69,8 @@ namespace NetConf.Xncf.Admin
             //指定需要删除的数据实体
 
             //注意：这里作为演示，在卸载模块的时候删除了所有本模块创建的表，实际操作过程中，请谨慎操作，并且按照删除顺序对实体进行排序！
-            var dropTableKeys = EntitySetKeys.GetEntitySetInfo(this.TryGetXncfDatabaseDbContextType).Keys.ToArray();
-            await base.DropTablesAsync(serviceProvider, mySenparcEntities, dropTableKeys);
+            //var dropTableKeys = EntitySetKeys.GetEntitySetInfo(this.TryGetXncfDatabaseDbContextType).Keys.ToArray();
+            //await base.DropTablesAsync(serviceProvider, mySenparcEntities, dropTableKeys);
 
             #endregion
 
