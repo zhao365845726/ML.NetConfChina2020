@@ -235,7 +235,7 @@ new Vue({
                         Cover: that.dialog.data.cover,
                         Video: that.dialog.data.video,
                         Content: that.dialog.data.content,
-                        Price: that.dialog.data.price
+                        Price: parseFloat(that.dialog.data.price)
                     };
                     console.log('add-' + JSON.stringify(data));
                     service.post("/Admin/Products/Edit?handler=Save", data).then(res => {

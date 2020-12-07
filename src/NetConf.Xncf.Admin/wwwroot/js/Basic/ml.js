@@ -3,7 +3,7 @@
 //输出js日志
 function log(title, value, type, isDebugger = false) {
     var url = window.location.href;
-    if (url.indexOf('htlx') > -1) {
+    if (url.indexOf('netconf') > -1) {
         logDebug = false;
     }
     if (logDebug) {

@@ -122,7 +122,7 @@ Vue.component('ckeditor', {
             editor: null, // 编辑器实例
             loader: null,
             debug: false,
-            imgUploadUrl:'https://htlx.milisx.xyz/api/v1/common/editorupload',
+            imgUploadUrl:'http://netconf.milisx.com/api/v1/common/editorupload',
         };
     },
     mounted() {
@@ -130,7 +130,7 @@ Vue.component('ckeditor', {
         that.init()
         var url = window.location.href;
         if (url.indexOf('htlx') > -1) {
-            that.imgUploadUrl = 'https://htlx.milisx.xyz/api/v1/common/editorupload';
+            that.imgUploadUrl = 'http://netconf.milisx.com/api/v1/common/editorupload';
         } else {
             that.imgUploadUrl = 'https://localhost:44311/api/v1/common/editorupload';
         }
