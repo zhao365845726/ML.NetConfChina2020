@@ -14,7 +14,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel.Dto
         {
         }
 
-        public UserDto(string id, string nickName, string account, string password, string name, string gender, decimal balance)
+        public UserDto(string id, string nickName, string account, string password, string name, string gender, decimal balance, string openId)
         {
             Id = id;
             NickName = nickName;
@@ -23,6 +23,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel.Dto
             Name = name;
             Gender = gender;
             Balance = balance;
+            OpenId = openId;
         }
 
         public string Id { get; set; }
@@ -61,6 +62,12 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel.Dto
         /// 账户余额
         /// </summary>
         public decimal Balance { get; set; }
+
+        /// <summary>
+        /// 微信OpenId
+        /// </summary>
+        [MaxLength(50)]
+        public string OpenId { get; set; }
 
     }
 }

@@ -54,7 +54,8 @@ namespace NetConf.Xncf.Admin.Services
                 _.Id,
                 _.Name,
                 _.Cover,
-                _.AddTime
+                _.AddTime,
+                _.Price
             });
         }
 
@@ -70,7 +71,8 @@ namespace NetConf.Xncf.Admin.Services
                 products.Cover,
                 products.Video,
                 products.Content,
-                products.AddTime
+                products.AddTime,
+                products.Price
             };
         }
         #endregion

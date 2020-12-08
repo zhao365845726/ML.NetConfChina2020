@@ -33,6 +33,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
             Name = userDto.Name;
             Gender = userDto.Gender;
             Balance = userDto.Balance;
+            OpenId = userDto.OpenId;
         }
 
         public void Update(UserDto userDto)
@@ -44,6 +45,7 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
             Name = userDto.Name;
             Gender = userDto.Gender;
             Balance = userDto.Balance;
+            OpenId = userDto.OpenId;
         }
 
         /// <summary>
@@ -80,6 +82,12 @@ namespace NetConf.Xncf.Admin.Models.DatabaseModel
         /// 账户余额
         /// </summary>
         public decimal Balance { get; set; }
+
+        /// <summary>
+        /// 微信OpenId
+        /// </summary>
+        [MaxLength(50)]
+        public string OpenId { get; set; }
 
     }
 }

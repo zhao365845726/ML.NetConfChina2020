@@ -10,6 +10,8 @@ using Senparc.CO2NET.Trace;
 using NetConf.Xncf.Admin.Models.DatabaseModel;
 using NetConf.Xncf.Admin.Models.DatabaseModel.Dto;
 using AutoMapper;
+using System.Net.Http;
+using Senparc.CO2NET.HttpUtility;
 
 namespace NetConf.Xncf.Admin.Controllers
 {
@@ -26,6 +28,67 @@ namespace NetConf.Xncf.Admin.Controllers
         public UserController(UserService userService)
         {
             this.userService = userService;
+        }
+
+        /// <summary>
+        /// 获取OpenId
+        /// </summary>
+        /// <param name="code">微信小程序Code</param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> GetOpenIdAsync(string code)
+        {
+            try
+            {
+                string strAppId = "wx133b351ac060a310";
+                string strSecret = "ad86ca4cb847a418346a8f0558bcca14";
+                string strRequestUrl = $"https://api.weixin.qq.com/sns/jscode2session?appid={strAppId}&secret={strSecret}&js_code={code}&grant_type=authorization_code";
+                HttpClient httpClient = new HttpClient();
+                SenparcHttpClient senparcHttpClient = new SenparcHttpClient(httpClient);
+                var httpResponse = await senparcHttpClient.Client.GetAsync(strRequestUrl);
+                var response = httpResponse.Content.ReadAsStringAsync().Result;
+                return Success(response);
+            }
+            catch (Exception ex)
+            {
+                return Fail(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// WX登录
+        /// </summary>
+        /// <param name="openId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> WxLoginAsync(string openId)
+        {
+            try
+            {
+                var user = await userService.GetObjectAsync(_ => _.OpenId.Equals(openId));
+                if(user != null)
+                {
+                    return Success(user);
+                }
+                Random random = new Random();
+                int iRan = random.Next(100000, 999999);
+                UserDto dto = new UserDto()
+                {
+                    NickName = $"昵称{iRan}",
+                    Account = $"U{iRan}",
+                    Password = "123456",
+                    Name = $"姓名{iRan}",
+                    Gender = "男",
+                    Balance = 1000,
+                    OpenId = openId
+                };
+                var response = await userService.CreateOrUpdateAsync(dto);
+                return Success(response);
+            }
+            catch (Exception ex)
+            {
+                return Fail(ex.Message);
+            }
         }
 
         /// <summary>
