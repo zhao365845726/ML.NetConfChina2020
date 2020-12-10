@@ -39,7 +39,7 @@ namespace NetConf.Xncf.Admin.Areas.Admin.Pages.Products
         public Task OnGetAsync()
         {
             BaseUrl = $"{Request.Scheme}://{Request.Host.Value}";
-            UpFileUrl = $"{BaseUrl}/api/v1/common/upload";
+            UpFileUrl = $"{BaseUrl}/api/v2/common/upload";
             return Task.CompletedTask;
         }
 

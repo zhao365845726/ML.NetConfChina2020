@@ -164,7 +164,7 @@ new Vue({
                 // 新增
                 that.dialog.title = '新增作品';
                 that.dialogImageUrl = '';
-                //that.$refs['bodyEditor'].editor.setData('');
+                that.$refs['bodyEditor'].editor.setData('');
                 return;
             }
             // 编辑
@@ -172,18 +172,15 @@ new Vue({
             that.dialog.data = {
                 id,categoryId, name, cover, video, content,price
             };
-            //if (cover != '' && cover != undefined)
-            //{
-            //    that.dialogImageUrl = cover;
-            //}
-            //if (body != '' && body != undefined)
-            //{
-            //    that.editorData = this.$refs['bodyEditor'].editor.setData(body);
-            //}
-            //if (that.editorData == '')
-            //{
-            //    that.editorData = this.$refs['bodyEditor'].editor.setData(body);
-            //}
+            if (cover != '' && cover != undefined)
+            {
+                that.dialogImageUrl = cover;
+            }
+            if (content != '' && content != undefined) {
+                that.editorData = that.$refs['bodyEditor'].editor.setData(content);
+            } else {
+                that.editorData = that.$refs['bodyEditor'].editor.setData('');
+            }
             // dialog中父级菜单 做递归显示
             //let x = [];
             //that.recursionFunc(row, this.categoryData, x);
@@ -222,8 +219,7 @@ new Vue({
             let that = this
             that.dialog.updateLoading = true;
             that.$refs['dataForm'].validate(valid => {
-                //that.editorData = that.$refs['bodyEditor'].editor.getData()
-                //that.dialog.data.body = that.$refs['bodyEditor'].editor.getData();
+                that.dialog.data.content = that.$refs['bodyEditor'].editor.getData();
                 // 表单校验
                 if (valid)
                 {

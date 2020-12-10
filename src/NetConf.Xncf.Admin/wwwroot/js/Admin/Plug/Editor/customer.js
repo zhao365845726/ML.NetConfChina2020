@@ -122,17 +122,17 @@ Vue.component('ckeditor', {
             editor: null, // 编辑器实例
             loader: null,
             debug: false,
-            imgUploadUrl:'http://netconf.milisx.com/api/v1/common/editorupload',
+            imgUploadUrl:'http://netconf.milisx.com/api/v2/common/editorupload',
         };
     },
     mounted() {
         let that = this
         that.init()
         var url = window.location.href;
-        if (url.indexOf('htlx') > -1) {
-            that.imgUploadUrl = 'http://netconf.milisx.com/api/v1/common/editorupload';
+        if (url.indexOf('netconf') > -1) {
+            that.imgUploadUrl = 'http://netconf.milisx.com/api/v2/common/editorupload';
         } else {
-            that.imgUploadUrl = 'https://localhost:44311/api/v1/common/editorupload';
+            that.imgUploadUrl = 'https://localhost:44311/api/v2/common/editorupload';
         }
     },
     methods: {

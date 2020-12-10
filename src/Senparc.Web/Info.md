@@ -26,6 +26,8 @@
 
 请保存好以下信息：
 
+http://netconf.milisx.com/Admin/Login/?ReturnUrl=%2Fadmin
+
 管理员账号：SenparcCoreAdmin84
 
 管理员密码：2e5e052e

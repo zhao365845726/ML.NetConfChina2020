@@ -70,8 +70,8 @@
             <el-table-column prop="name" align="left" label="商品名称"></el-table-column>
             <el-table-column prop="cover" class-name="col-thumb" align="center" label="封面图">
                 <template slot-scope="scope">
-                    <a :href="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/lelinggusu/work_1.jpg'" target="_blank">
-                        <img :src="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/lelinggusu/work_1.jpg'">
+                    <a :href="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/netconfchina2020/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20201210101513.jpg'" target="_blank">
+                        <img :src="scope.row.cover ? scope.row.cover : 'https://mltest2020.oss-cn-beijing.aliyuncs.com/netconfchina2020/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20201210101513.jpg'">
                     </a>
                 </template>
             </el-table-column>
@@ -144,7 +144,7 @@
                 </el-form-item>
 
                 <el-form-item label="内容" prop="content">
-                    <el-input v-model="dialog.data.content" clearable placeholder="请输入内容" />
+                    <ckeditor v-bind:content="editorData" ref="bodyEditor"></ckeditor>
                 </el-form-item>
                 <el-form-item label="价格" prop="price">
                     <el-input v-model="dialog.data.price" clearable placeholder="请输入价格" />
@@ -159,6 +159,9 @@
 </div>
 @section scripts
 {
+    <script src="~/js/Admin/Plug/Editor/ckfinder.js"></script>
+    <script src="~/js/Admin/Plug/Editor/ckeditor.js"></script>
+    <script src="~/js/Admin/Plug/Editor/customer.js"></script>
     <script src="~/js/Basic/ml.js"></script>
     <script src="~/js/Admin/Pages/Products/products.js"></script>
 }
