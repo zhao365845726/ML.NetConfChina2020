@@ -22,23 +22,6 @@ namespace NetConf.Xncf.Admin
             {
                 FileProvider = new PhysicalFileProvider(path),
                 RequestPath = staticResourceSetting.CurrentValue.RequestPath,
-                //OnPrepareResponse = (x) =>//验证静态资源授权
-                //{
-                //    var token = x.Context.Request.Query["token"];
-                //    if (string.IsNullOrWhiteSpace(token))
-                //        token = x.Context.Request.Headers["token"];
-                //    try
-                //    {
-                //        x.Context.RequestServices.GetService<SysKeyService>().ValidToken(token).GetAwaiter().GetResult();
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        x.Context.Response.StatusCode = StatusCodes.Status404NotFound;
-                //        x.Context.Response.WriteAsync(ex.Message);
-                //    }
-                //    //new StatusCodes().Status401Unauthorized
-                //    //x.Context.Response.Headers.Add("Access-Control-Allow-Origin", "*");//允许跨域，Core已做处理
-                //}
             };
             app.UseStaticFiles(fileOptions);
             app.UseCors();

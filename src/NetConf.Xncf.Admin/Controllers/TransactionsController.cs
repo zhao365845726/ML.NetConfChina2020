@@ -14,7 +14,7 @@ using AutoMapper;
 namespace NetConf.Xncf.Admin.Controllers
 {
     /// <summary>
-    /// 消息接口
+    /// 交易接口
     /// </summary>
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]

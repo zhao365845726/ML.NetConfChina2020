@@ -36,7 +36,7 @@
         </member>
         <member name="T:NetConf.Xncf.Admin.Controllers.CategoryController">
             <summary>
-            消息接口
+            分类接口
             </summary>
         </member>
         <member name="M:NetConf.Xncf.Admin.Controllers.CategoryController.GetListAsync(System.Int32,System.Int32)">
@@ -68,7 +68,7 @@
         </member>
         <member name="T:NetConf.Xncf.Admin.Controllers.OrdersController">
             <summary>
-            消息接口
+            订单接口
             </summary>
         </member>
         <member name="M:NetConf.Xncf.Admin.Controllers.OrdersController.AddCartAsync(System.String,System.String,System.Decimal,System.Int32)">
@@ -124,7 +124,7 @@
         </member>
         <member name="T:NetConf.Xncf.Admin.Controllers.ProductsController">
             <summary>
-            消息接口
+            商品接口
             </summary>
         </member>
         <member name="M:NetConf.Xncf.Admin.Controllers.ProductsController.GetListAsync(System.String,System.Int32,System.Int32)">
@@ -145,7 +145,7 @@
         </member>
         <member name="T:NetConf.Xncf.Admin.Controllers.TransactionsController">
             <summary>
-            消息接口
+            交易接口
             </summary>
         </member>
         <member name="M:NetConf.Xncf.Admin.Controllers.TransactionsController.GetListAsync(System.String,System.Int32,System.Int32)">
@@ -159,8 +159,22 @@
         </member>
         <member name="T:NetConf.Xncf.Admin.Controllers.UserController">
             <summary>
-            消息接口
+            用户接口
             </summary>
+        </member>
+        <member name="M:NetConf.Xncf.Admin.Controllers.UserController.GetOpenIdAsync(System.String)">
+            <summary>
+            获取OpenId
+            </summary>
+            <param name="code">微信小程序Code</param>
+            <returns></returns>
+        </member>
+        <member name="M:NetConf.Xncf.Admin.Controllers.UserController.WxLoginAsync(System.String)">
+            <summary>
+            WX登录
+            </summary>
+            <param name="openId">微信OpenId</param>
+            <returns></returns>
         </member>
         <member name="M:NetConf.Xncf.Admin.Controllers.UserController.GuestLoginAsync">
             <summary>
@@ -343,6 +357,11 @@
             账户余额
             </summary>
         </member>
+        <member name="P:NetConf.Xncf.Admin.Models.DatabaseModel.Dto.UserDto.OpenId">
+            <summary>
+            微信OpenId
+            </summary>
+        </member>
         <member name="T:NetConf.Xncf.Admin.Models.DatabaseModel.Orders">
             <summary>
             Orders 实体类
@@ -481,6 +500,11 @@
         <member name="P:NetConf.Xncf.Admin.Models.DatabaseModel.User.Balance">
             <summary>
             账户余额
+            </summary>
+        </member>
+        <member name="P:NetConf.Xncf.Admin.Models.DatabaseModel.User.OpenId">
+            <summary>
+            微信OpenId
             </summary>
         </member>
         <member name="T:NetConf.Xncf.Admin.Models.DatabaseModel.VO.ActionResultVO`1">

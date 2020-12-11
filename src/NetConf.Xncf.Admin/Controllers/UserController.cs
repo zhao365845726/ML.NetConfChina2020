@@ -16,7 +16,7 @@ using Senparc.CO2NET.HttpUtility;
 namespace NetConf.Xncf.Admin.Controllers
 {
     /// <summary>
-    /// 消息接口
+    /// 用户接口
     /// </summary>
     [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]
@@ -58,7 +58,7 @@ namespace NetConf.Xncf.Admin.Controllers
         /// <summary>
         /// WX登录
         /// </summary>
-        /// <param name="openId"></param>
+        /// <param name="openId">微信OpenId</param>
         /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> WxLoginAsync(string openId)
