@@ -64,8 +64,6 @@
                     <el-radio :label="scope.$index" v-model="radio" @@change.native="getCurrentRow(scope.row)"></el-radio>
                 </template>
             </el-table-column>
-
-            @*<el-table-column prop="categoryId" align="left" label="分类Id"></el-table-column>*@
             <el-table-column prop="categoryName" align="left" label="分类名称"></el-table-column>
             <el-table-column prop="name" align="left" label="商品名称"></el-table-column>
             <el-table-column prop="cover" class-name="col-thumb" align="center" label="封面图">
@@ -76,7 +74,7 @@
                 </template>
             </el-table-column>
             <el-table-column prop="video" align="left" label="视频简介"></el-table-column>
-            <el-table-column prop="content" align="left" label="内容"></el-table-column>
+            <el-table-column prop="content" align="left" label="内容" :formatter="setContentFormat"></el-table-column>
             <el-table-column align="center"
                              label="添加时间">
                 <template slot-scope="scope">

@@ -42,7 +42,7 @@ new Vue({
             dialogVisible: false,
             dialog:
             {
-                title: '新增作品',
+                title: '新增商品',
                 visible: false,
                 data:
                 {
@@ -52,7 +52,7 @@ new Vue({
                 {
                     name:
                     [
-                        { required: true, message: "作品名称为必填项", trigger: "blur" }
+                        { required: true, message: "商品名称为必填项", trigger: "blur" }
                     ]
                 },
                 updateLoading: false,
@@ -122,7 +122,7 @@ new Vue({
                 message: '上传失败，请重新上传'
             });
         },
-        // 获取所有作品
+        // 获取所有商品
         async getList()
         {
             let that = this
@@ -151,7 +151,7 @@ new Vue({
                 log('categoryData',res,2);
             });
         },
-        // 编辑 // 新增作品 // 增加下一级
+        // 编辑 // 新增商品 // 增加下一级
         handleEdit(index, row, flag)
         {
             let that = this
@@ -162,7 +162,7 @@ new Vue({
             if (flag === 'add')
             {
                 // 新增
-                that.dialog.title = '新增作品';
+                that.dialog.title = '新增商品';
                 that.dialogImageUrl = '';
                 that.$refs['bodyEditor'].editor.setData('');
                 return;
@@ -189,7 +189,7 @@ new Vue({
             that.selectCategory = categoryId;
             if (flag === 'edit')
             {
-                that.dialog.title = '编辑作品';
+                that.dialog.title = '编辑商品';
             }
         },
         // 设置父级菜单默认显示 递归
